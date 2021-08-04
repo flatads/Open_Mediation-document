@@ -197,7 +197,7 @@ public void onError(Error error) {
 OmAds.setUserId(String userId);
 ```
 
-#### 添加 SDK
+#### 9. 添加广告源SDK聚合
 将下面的脚本添加到您的 application-level **build.gradle** 文件中 **dependencies** 分段内
 ```groovy
 dependencies{
@@ -254,7 +254,7 @@ implementation 'com.openmediation.adapters:mintegral:2.3.0'
 ```
 
 
-#### 9 开屏广告
+#### 10. 开屏广告
 开屏广告以 APP 启动作为曝光时机，提供 3s~5s 的广告展示时间。用户可以点击广告跳转到目标页面， 或者点击右上角的“跳过”按钮，跳转到 APP 内容首页。
 
 
@@ -334,7 +334,7 @@ if (SplashAd.isReady(placementId)) {
 }
 ```
 
-#### 10. 激励视频
+#### 11. 激励视频
 
 **Step 1. 设置激励视频回调**
 
@@ -505,7 +505,7 @@ http://yourendpoint.com?variable_name_you_define={content}
 
 {content} - 验证信息，由开发者在SDK客户端设置的ExtId填入，并通过 OpenMediation 服务器传递给您的服务端回调接口，用于验证激励的有效性。
 
-#### 11. 插屏广告
+#### 12. 插屏广告
 插屏广告是一种全屏展现的广告类型，通常用于app中自然的场景切换过程。OpenMediation SDK同时支持静态（图片）和动态（视频）两种形式的插屏广告类型。
 
 **Step 1. 设置插屏广告回调**
@@ -602,7 +602,7 @@ if (InterstitialAd.isReady()) {
 ```
 当您成功的完成步骤2，意味着广告已经展示成功。如果您想展示另外的广告，只需重复步骤2进行展示即可，不需要手动调用loadAd方法进行广告加载。
 
-#### 12. 横幅广告
+#### 13. 横幅广告
 横幅广告（Banner）提供一个长方形的横幅广告，一般在应用指定的区域提供展现。
 
 **Step 1. 初始化BannerAd对象**
@@ -715,7 +715,7 @@ public void onDestroy() {
 }
 ```
 
-#### 13. 集成测试
+#### 14. 集成测试
 测试广告位
 启用测试的最快方法是使用 OpenMediation 提供的演示广告位：
 
@@ -725,7 +725,7 @@ AppKey：OtnCjcU7ERE0D21GRoquiQBY6YXR3YLl
 激励广告	：4903
 开屏广告	：8144
 
-#### 14. SDK错误处理机制
+#### 15. SDK错误处理机制
 在集成SDK进行初始化、广告加载、展示的过程中，如果发生任何的异常或操作失败，如广告无填充、展示失败等，SDK都会在回调接口的失败事件中返回对应的错误信息，包括错误码和错误消息，来指示当前问题的具体原因。
 
 如，初始化操作是通过InitCallback回调接口的onError事件方法，而广告展示操作则是通过各个广告单元的Listener回调接口，如激励视频的RewardedVideoListener 回调接口，通过回调事件方法onRewardedVideoAdShowFailed来通知激励视频加载展示过程中可能出现的失败，事件的唯一参数error是一个Error类的对象，从中解析到错误码和错误消息。具体参见Android SDK下载与集成和广告单元。
