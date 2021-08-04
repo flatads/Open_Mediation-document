@@ -1,5 +1,6 @@
 # flat-ads-om-document
-##OpenMediation SDK对接说明文档
+
+## OpenMediation SDK对接说明文档
 
 > 开始之前
 >我们支持Android系统版本Version 4.1 (API Level 16) 及以上。请确保满足以下要求：
@@ -8,17 +9,17 @@
 >Target Android API level 28
 >minSdkVersion level 16 及以上
 
-####1. 概述
+#### 1. 概述
 
 本手册介绍如何将OpenMediation SDK集成到您的Android应用中。
 
-####2. Ads ID
+#### 2. Ads ID
 
 在进行SDK集成之前，您需要得到集成所必要的信息：APP_KEY 和 Placement ID。请联系您的客户经理获得。
 
 APP_KEY: APP_KEY 是给开发者应用分配的唯一标识。Placement ID: 是广告位的唯一标识。
 
-####3. 添加SDK到开发项目中
+#### 3. 添加SDK到开发项目中
 
 将下面的脚本添加到您的 project-level build.gradle 文件中。
 ```
@@ -42,7 +43,7 @@ implementation 'com.openmediation:om-android-sdk:2.3.2'
 git clone git://github.com/AdTiming/OpenMediation-Android.git
 ```
 
-####4. 更新 AndroidManifest.xml配置
+#### 4. 更新 AndroidManifest.xml配置
 
 接下来需要添加配置到您的AndroidManifest.xml 文件中，将以下所示的permission脚本添加到<manifest> 中，确保不要放在 <application> 内。
 ```
@@ -51,7 +52,7 @@ git clone git://github.com/AdTiming/OpenMediation-Android.git
 <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 ```
 
-####5. Proguard
+#### 5. Proguard
 
 如果您在应用中使用了Proguard来保护代码，请务必添加下面的配置到您的 Proguard 配置文件 (Android Studio: proguard-rules.pro or Eclipse: proguard-project.txt)，否则SDK将会报错。
 ```
@@ -69,7 +70,7 @@ git clone git://github.com/AdTiming/OpenMediation-Android.git
 }
 ```
 
-####6. MultiDex
+#### 6. MultiDex
 
 如果您的应用中使用了multiDex，需要添加下面脚本到build.gradle文件。
 ```
@@ -88,7 +89,7 @@ android {
 -dontwarn com.openmediation.sdk.**.*
 ```
 
-####7. 重载Activity生命周期方法
+#### 7. 重载Activity生命周期方法
 
 在开始初始化SDK之前，您需要重写应用的生命周期方法。重载每个Activity对象的onPause()和onResume()方法，调用对应的OmAds.onPause()和onResume()方法，如下所示。
 ```
@@ -102,7 +103,7 @@ protected void onPause() {
   }
 ```
 
-####8. 初始化SDK
+#### 8. 初始化SDK
 
 完成SDK的下载与集成后，就可以开始对SDK进行初始化了。初始化是在调用SDK进行广告加载展示之前必须做的工作，否则SDK不会进行任何有效的工作。我们建议在应用启动的时候进行SDK初始化，比如在 Application 或 Activity 的 onCreat() 事件方法是一个不错的选择，如下所示：
 ```
@@ -134,7 +135,7 @@ APP KEY需要在OpenMediation前台创建应用时获取的。
 SDK的智能库存机制会自动加载和维护激励视频与插屏视频的广告库存，因此不需要手动调用load方法来加载这两种广告。
 onError回调方法的error参数包含初始化失败的原因，如遇到异常请参考 错误与诊断 获取更多信息。
 
-####最佳实践：按广告类型初始化
+#### 最佳实践：按广告类型初始化
 
 v2.0及以上版本的SDK提供了新的初始化方案，可以指定一个或多个广告类型进行初始化。我们建议使用这种新的方法进行初始化，因为按广告类型的初始化方法仅仅会获取对应类型的广告进行预加载。基于这种方法，开发者可以将不同类型广告的初始化和预加载放在应用的不同时间节点上，基于应用的广告场景设计。这种方案的好处是，可以将原先集中在应用启动的时间点进行的广告预加载动作，分散到不同时间点，避免可能的网络拥挤导致广告加载速度缓慢、以致影响应用体验。
 
@@ -174,7 +175,7 @@ InitConfiguration configuration = new InitConfiguration.Builder()
     .build();
 OmAds.init(configuration, callback);
 ```
-####实现回调事件处理
+#### 实现回调事件处理
 
 OpenMediation SDK在初始化操作中会出发一系列的事件来通知应用程序，您需要实现InitCallback接口的onSuccess() 和 onError() 回调方法以处理初始化成功和失败的事件。
 ```
@@ -189,7 +190,7 @@ public void onError(Error error) {
 }
 ```
 
-####上报自定义用户标识符
+#### 上报自定义用户标识符
 
 应用可以通过SDK上报自定义的设备标识符，只需要在初始化之前调用setUserId方法设置。该标识符会在用户级的数据中体现。
 ```
@@ -253,7 +254,7 @@ implementation 'com.openmediation.adapters:mintegral:2.3.0'
 ```
 
 
-####9 开屏广告
+#### 9 开屏广告
 开屏广告以 APP 启动作为曝光时机，提供 3s~5s 的广告展示时间。用户可以点击广告跳转到目标页面， 或者点击右上角的“跳过”按钮，跳转到 APP 内容首页。
 
 
@@ -333,7 +334,7 @@ if (SplashAd.isReady(placementId)) {
 }
 ```
 
-####10. 激励视频
+#### 10. 激励视频
 
 **Step 1. 设置激励视频回调**
 
@@ -504,7 +505,7 @@ http://yourendpoint.com?variable_name_you_define={content}
 
 {content} - 验证信息，由开发者在SDK客户端设置的ExtId填入，并通过 OpenMediation 服务器传递给您的服务端回调接口，用于验证激励的有效性。
 
-####11. 插屏广告
+#### 11. 插屏广告
 插屏广告是一种全屏展现的广告类型，通常用于app中自然的场景切换过程。OpenMediation SDK同时支持静态（图片）和动态（视频）两种形式的插屏广告类型。
 
 **Step 1. 设置插屏广告回调**
@@ -601,7 +602,7 @@ if (InterstitialAd.isReady()) {
 ```
 当您成功的完成步骤2，意味着广告已经展示成功。如果您想展示另外的广告，只需重复步骤2进行展示即可，不需要手动调用loadAd方法进行广告加载。
 
-####12. 横幅广告
+#### 12. 横幅广告
 横幅广告（Banner）提供一个长方形的横幅广告，一般在应用指定的区域提供展现。
 
 **Step 1. 初始化BannerAd对象**
@@ -714,7 +715,7 @@ public void onDestroy() {
 }
 ```
 
-####13. 集成测试
+#### 13. 集成测试
 测试广告位
 启用测试的最快方法是使用 OpenMediation 提供的演示广告位：
 
@@ -724,7 +725,7 @@ AppKey：OtnCjcU7ERE0D21GRoquiQBY6YXR3YLl
 激励广告	：4903
 开屏广告	：8144
 
-####14. SDK错误处理机制
+#### 14. SDK错误处理机制
 在集成SDK进行初始化、广告加载、展示的过程中，如果发生任何的异常或操作失败，如广告无填充、展示失败等，SDK都会在回调接口的失败事件中返回对应的错误信息，包括错误码和错误消息，来指示当前问题的具体原因。
 
 如，初始化操作是通过InitCallback回调接口的onError事件方法，而广告展示操作则是通过各个广告单元的Listener回调接口，如激励视频的RewardedVideoListener 回调接口，通过回调事件方法onRewardedVideoAdShowFailed来通知激励视频加载展示过程中可能出现的失败，事件的唯一参数error是一个Error类的对象，从中解析到错误码和错误消息。具体参见Android SDK下载与集成和广告单元。
