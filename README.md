@@ -1,4 +1,4 @@
-# flat-ads-om-document
+# Open_Mediation SDK_Integration_Document
 
 ## OpenMediation SDK对接说明文档
 
