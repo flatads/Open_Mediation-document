@@ -201,7 +201,7 @@ OmAds.setUserId(String userId);
 将下面的脚本添加到您的 application-level **build.gradle** 文件中 **dependencies** 分段内
 ```groovy
 dependencies{
-	implementation 'com.flatads.sdk:flatads:1.1.13'
+	implementation 'com.flatads.sdk:flatads:1.1.16'
 	implementation 'com.adtiming:adnetwork:6.9.1'
 	implementation 'com.mbridge.msdk.oversea:videojs:15.5.31'
     implementation 'com.mbridge.msdk.oversea:mbjscommon:15.5.31'

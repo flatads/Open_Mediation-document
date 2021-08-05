@@ -56,7 +56,7 @@ dependencies {
     implementation 'com.openmediation.adapters:adtiming:2.3.1'
     implementation 'com.openmediation.adapters:mintegral:2.3.0'
 
-    implementation 'com.flatads.sdk:flatads:1.1.13'
+    implementation 'com.flatads.sdk:flatads:1.1.16'
     implementation 'com.adtiming:adnetwork:6.9.1'
 
 }
