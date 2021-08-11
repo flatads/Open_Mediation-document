@@ -1,19 +1,14 @@
 package com.example.adtiming;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.openmediation.sdk.InitCallback;
 import com.openmediation.sdk.InitConfiguration;
@@ -23,17 +18,10 @@ import com.openmediation.sdk.banner.BannerAd;
 import com.openmediation.sdk.banner.BannerAdListener;
 import com.openmediation.sdk.interstitial.InterstitialAd;
 import com.openmediation.sdk.interstitial.InterstitialAdListener;
-import com.openmediation.sdk.nativead.AdIconView;
-import com.openmediation.sdk.nativead.AdInfo;
-import com.openmediation.sdk.nativead.MediaView;
-import com.openmediation.sdk.nativead.NativeAd;
-import com.openmediation.sdk.nativead.NativeAdListener;
-import com.openmediation.sdk.nativead.NativeAdView;
 import com.openmediation.sdk.utils.error.Error;
 import com.openmediation.sdk.utils.model.Scene;
 import com.openmediation.sdk.video.RewardedVideoAd;
 import com.openmediation.sdk.video.RewardedVideoListener;
-import com.openmediation.testsuite.TestSuite;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getSimpleName();
@@ -52,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
         InitConfiguration configuration = new InitConfiguration.Builder()
                 .appKey("OtnCjcU7ERE0D21GRoquiQBY6YXR3YLl")
+                .preloadAdTypes(OmAds.AD_TYPE.INTERSTITIAL, OmAds.AD_TYPE.REWARDED_VIDEO)
                 .logEnable(true)
                 .build();
 
@@ -59,6 +48,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onSuccess() {
                 Log.d(TAG, "init success");
+                initInterstitial();
+                initRewarded();
             }
 
             @Override
@@ -66,10 +57,11 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(TAG, "error: " + error.getErrorMessage());
             }
         });
-        initInterstitial();
-        initRewarded();
 
-        button1.setOnClickListener(v -> initBanner());
+
+        button1.setOnClickListener(v ->
+                initBanner()
+        );
 
         button2.setOnClickListener(v -> {
             if (InterstitialAd.isReady()) {
@@ -104,8 +96,8 @@ public class MainActivity extends AppCompatActivity {
                     ((ViewGroup) view.getParent()).removeView(view);
                 }
                 linearLayout.removeAllViews();
-                ConstraintLayout.LayoutParams layoutParams = new ConstraintLayout.LayoutParams(
-                        ConstraintLayout.LayoutParams.MATCH_PARENT, ConstraintLayout.LayoutParams.MATCH_PARENT);
+                FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(
+                        ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
                 linearLayout.addView(view, layoutParams);
             }
 
