@@ -247,7 +247,7 @@ allprojects {
 #### 添加 Adapter
 将下面的脚本添加到您的 application-level **build.gradle** 文件中 **dependencies** 分段内
 ```groovy
-implementation 'com.openmediation.adapters:flatads:2.3.2'
+implementation 'com.openmediation.adapters:flatads:2.3.3'
 implementation 'com.openmediation.adapters:adtiming:2.3.1'
 implementation 'com.openmediation.adapters:mintegral:2.3.0'
 
